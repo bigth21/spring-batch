@@ -19,14 +19,23 @@ public class HelloJobConfiguration {
     @Bean
     public Job helloJob() {
         return jobBuilderFactory.get("helloJob")
-                .start(helloStep())
+                .start(helloStep1())
+                .next(helloStep2())
                 .build();
     }
 
-    private Step helloStep() {
-        return stepBuilderFactory.get("helloStep")
+    private Step helloStep1() {
+        return stepBuilderFactory.get("helloStep1")
                 .tasklet(((contribution, chunkContext) -> {
-                    System.out.println("Hello Spring Batch");
+                    System.out.println("Hello Spring Batch step-1");
+                    return RepeatStatus.FINISHED;
+                })).build();
+    }
+
+    private Step helloStep2() {
+        return stepBuilderFactory.get("helloStep2")
+                .tasklet(((contribution, chunkContext) -> {
+                    System.out.println("Hello Spring Batch step-2");
                     return RepeatStatus.FINISHED;
                 })).build();
     }
