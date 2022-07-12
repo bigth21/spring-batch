@@ -10,7 +10,11 @@ import org.springframework.batch.repeat.RepeatStatus;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
-@Configuration
+/**
+ * 2. Spring batch start
+ *  - Hello Spring Batch
+ */
+//@Configuration
 @RequiredArgsConstructor
 public class HelloJobConfiguration {
 

@@ -6,3 +6,5 @@ spring:
   batch:
     jdbc:
       initialize-schema: embedded # Default
+    job:
+      enabled: false # Disable auto-start of Job
