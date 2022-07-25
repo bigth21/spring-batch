@@ -1,7 +1,8 @@
-package com.example.springbatch.jobinstance;
+package com.example.springbatch.jobparameter;
 
 import lombok.RequiredArgsConstructor;
 import org.springframework.batch.core.Job;
+import org.springframework.batch.core.JobParameters;
 import org.springframework.batch.core.Step;
 import org.springframework.batch.core.configuration.annotation.JobBuilderFactory;
 import org.springframework.batch.core.configuration.annotation.StepBuilderFactory;
@@ -9,20 +10,18 @@ import org.springframework.batch.repeat.RepeatStatus;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
-/**
- * 3. Spring Batch domain understanding
- *  - Job Instance
- */
-//@Configuration
+import java.util.Date;
+
+@Configuration
 @RequiredArgsConstructor
-public class JobInstanceJobConfiguration {
+public class JobParameterJobConfiguration {
 
     private final JobBuilderFactory jobBuilderFactory;
     private final StepBuilderFactory stepBuilderFactory;
 
-    @Bean("jobInstance.job")
-    public Job job() {
-        return jobBuilderFactory.get("jobInstance.job")
+    @Bean
+    public Job BatchJob() {
+        return this.jobBuilderFactory.get("Job")
                 .start(step1())
                 .next(step2()).build();
     }
@@ -30,6 +29,16 @@ public class JobInstanceJobConfiguration {
     public Step step1() {
         return stepBuilderFactory.get("step1")
                 .tasklet((contribution, chunkContext) -> {
+                    JobParameters jobParameters = contribution.getStepExecution().getJobParameters();
+                    String name = jobParameters.getString("name");
+                    Long seq = jobParameters.getLong("seq");
+                    Double age = jobParameters.getDouble("age");
+                    Date date = jobParameters.getDate("date");
+
+                    System.out.println("name: " + name);
+                    System.out.println("seq: " + seq);
+                    System.out.println("age: " + age);
+                    System.out.println("date: " + date);
                     System.out.println("Step1 has been executed");
                     return RepeatStatus.FINISHED;
                 }).build();
