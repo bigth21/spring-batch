@@ -1,4 +1,4 @@
-package com.example.springbatch.step;
+package com.example.springbatch.stepcontrubution;
 
 import lombok.RequiredArgsConstructor;
 import org.springframework.batch.core.Job;
@@ -9,19 +9,18 @@ import org.springframework.batch.repeat.RepeatStatus;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
-//@Configuration
+@Configuration
 @RequiredArgsConstructor
-public class StepConfiguration {
+public class StepContributionConfiguration {
 
     private final JobBuilderFactory jobBuilderFactory;
     private final StepBuilderFactory stepBuilderFactory;
 
     @Bean
     public Job batchJob() {
-        return this.jobBuilderFactory.get("step.job")
+        return this.jobBuilderFactory.get("stepContribution.job")
                 .start(step1())
                 .next(step2())
-                .next(step3())
                 .build();
     }
 
@@ -40,12 +39,4 @@ public class StepConfiguration {
                     return RepeatStatus.FINISHED;
                 }).build();
     }
-
-    public Step step3() {
-        return stepBuilderFactory.get("step3")
-                .tasklet(new CustomTasklet())
-                .build();
-    }
-
-
 }
