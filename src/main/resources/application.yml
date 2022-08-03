@@ -7,4 +7,4 @@ spring:
     jdbc:
       initialize-schema: embedded # Default
     job:
-      enabled: false # Disable auto-start of Job
+      enabled: true # Disable auto-start of Job

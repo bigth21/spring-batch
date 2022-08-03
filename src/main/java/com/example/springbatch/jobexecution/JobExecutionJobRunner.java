@@ -1,4 +1,4 @@
-package com.example.springbatch.jobparameter;
+package com.example.springbatch.jobexecution;
 
 import lombok.RequiredArgsConstructor;
 import org.springframework.batch.core.Job;
@@ -9,24 +9,21 @@ import org.springframework.boot.ApplicationArguments;
 import org.springframework.boot.ApplicationRunner;
 import org.springframework.stereotype.Component;
 
-import java.sql.Date;
-import java.time.LocalDate;
-
 //@Component
 @RequiredArgsConstructor
-public class JobParameterJobRunner implements ApplicationRunner {
+public class JobExecutionJobRunner implements ApplicationRunner {
 
     private final JobLauncher jobLauncher;
-    private final Job job;
+
+    private final Job jobExecutionJob;
+
 
     @Override
     public void run(ApplicationArguments args) throws Exception {
         JobParametersBuilder jobParametersBuilder = new JobParametersBuilder();
-        JobParameters jobParameters = jobParametersBuilder.addString("name", "user1")
-                .addLong("seq", 1L)
-                .addDate("date", Date.valueOf(LocalDate.now()))
-                .addDouble("age", 16.9).toJobParameters();
+        JobParameters jobParameters = jobParametersBuilder
+                .addString("name", "user4").toJobParameters();
 
-        jobLauncher.run(job, jobParameters);
+        jobLauncher.run(jobExecutionJob, jobParameters);
     }
 }
