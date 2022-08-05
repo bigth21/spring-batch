@@ -1,4 +1,4 @@
-package com.example.springbatch.jobrepository;
+package com.example.springbatch.domain.jobrepository;
 
 import lombok.RequiredArgsConstructor;
 import org.springframework.batch.core.*;
@@ -6,7 +6,7 @@ import org.springframework.batch.core.repository.JobRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
-@Component
+//@Component
 @RequiredArgsConstructor
 public class JobRepositoryListener implements JobExecutionListener {
 

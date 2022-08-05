@@ -1,4 +1,4 @@
-package com.example.springbatch.jobparameter;
+package com.example.springbatch.domain.jobparameter;
 
 import lombok.RequiredArgsConstructor;
 import org.springframework.batch.core.Job;
