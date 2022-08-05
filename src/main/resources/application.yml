@@ -1,10 +1,10 @@
 spring:
 
   profiles:
-    include: mysql
+    include: mysql, server
 
   batch:
     jdbc:
       initialize-schema: always # Default
     job:
-      enabled: true # Disable auto-start of Job
+      enabled: false # Disable auto-start of Job
