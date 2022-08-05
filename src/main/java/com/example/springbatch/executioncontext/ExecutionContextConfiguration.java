@@ -1,4 +1,4 @@
-package com.example.springbatch.stepcontrubution;
+package com.example.springbatch.executioncontext;
 
 import lombok.RequiredArgsConstructor;
 import org.springframework.batch.core.Job;
@@ -11,32 +11,37 @@ import org.springframework.context.annotation.Configuration;
 
 //@Configuration
 @RequiredArgsConstructor
-public class StepContributionConfiguration {
+public class ExecutionContextConfiguration {
 
     private final JobBuilderFactory jobBuilderFactory;
     private final StepBuilderFactory stepBuilderFactory;
 
     @Bean
     public Job batchJob() {
-        return this.jobBuilderFactory.get("stepContribution.job")
+        return this.jobBuilderFactory.get("executionContext.job")
                 .start(step1())
                 .next(step2())
+                .next(step3())
+                .next(step4())
                 .build();
     }
 
     public Step step1() {
         return stepBuilderFactory.get("step1")
-                .tasklet((contribution, chunkContext) -> {
-                    System.out.println("Step1 has been executed");
-                    return RepeatStatus.FINISHED;
-                }).build();
+                .tasklet(new ExecutionContextTasklet1()).build();
     }
 
     public Step step2() {
         return stepBuilderFactory.get("step2")
-                .tasklet((contribution, chunkContext) -> {
-                    System.out.println("Step2 has been executed");
-                    return RepeatStatus.FINISHED;
-                }).build();
+                .tasklet(new ExecutionContextTasklet2()).build();
+    }
+    public Step step3() {
+        return stepBuilderFactory.get("step3")
+                .tasklet(new ExecutionContextTasklet3()).build();
+    }
+
+    public Step step4() {
+        return stepBuilderFactory.get("step4")
+                .tasklet(new ExecutionContextTasklet4()).build();
     }
 }
