@@ -1,29 +1,32 @@
-package com.example.springbatch.execution.simplejob;
+package com.example.springbatch.execution.validator;
 
 import lombok.RequiredArgsConstructor;
-import org.springframework.batch.core.*;
+import org.springframework.batch.core.BatchStatus;
+import org.springframework.batch.core.ExitStatus;
+import org.springframework.batch.core.Job;
+import org.springframework.batch.core.Step;
 import org.springframework.batch.core.configuration.annotation.JobBuilderFactory;
 import org.springframework.batch.core.configuration.annotation.StepBuilderFactory;
-import org.springframework.batch.core.launch.support.RunIdIncrementer;
+import org.springframework.batch.core.job.DefaultJobParametersValidator;
 import org.springframework.batch.repeat.RepeatStatus;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
-//@Configuration
+@Configuration
 @RequiredArgsConstructor
-public class SimpleJobConfiguration {
+public class ValidatorConfiguration {
 
     private final JobBuilderFactory jobBuilderFactory;
     private final StepBuilderFactory stepBuilderFactory;
 
     @Bean
     public Job batchJob() {
-        return jobBuilderFactory.get("simpleJob.job")
+        return this.jobBuilderFactory.get("validator.job")
+                .validator(new DefaultJobParametersValidator(new String[]{"name", "date"}, new String[]{"count"}))
+//                .validator(new CustomJobParametersValidator())
                 .start(step1())
                 .next(step2())
                 .next(step3())
-                .incrementer(new RunIdIncrementer())
-                .validator(parameters -> {})
                 .build();
     }
 

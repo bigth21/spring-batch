@@ -10,3 +10,5 @@ spring:
     job:
       enabled: true # Disable auto-start of Job
       names: ${job.name:NONE}
+
+
