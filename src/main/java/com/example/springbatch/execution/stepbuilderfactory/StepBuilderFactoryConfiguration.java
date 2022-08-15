@@ -30,6 +30,10 @@ public class StepBuilderFactoryConfiguration {
         return this.jobBuilderFactory.get("stepBuilderFactory.job")
                 .incrementer(new RunIdIncrementer())
                 .start(step1())
+                .next(step2())
+                .next(step3())
+                .build();
+
     }
 
     public Step step1() {
