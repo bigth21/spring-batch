@@ -1,4 +1,4 @@
-package com.example.springbatch.execution.validator;
+package com.example.springbatch.job.validator;
 
 import lombok.RequiredArgsConstructor;
 import org.springframework.batch.core.BatchStatus;
@@ -10,7 +10,6 @@ import org.springframework.batch.core.configuration.annotation.StepBuilderFactor
 import org.springframework.batch.core.job.DefaultJobParametersValidator;
 import org.springframework.batch.repeat.RepeatStatus;
 import org.springframework.context.annotation.Bean;
-import org.springframework.context.annotation.Configuration;
 
 //@Configuration
 @RequiredArgsConstructor

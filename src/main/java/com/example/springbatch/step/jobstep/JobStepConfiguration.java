@@ -1,4 +1,4 @@
-package com.example.springbatch.execution.jobstep;
+package com.example.springbatch.step.jobstep;
 
 import lombok.RequiredArgsConstructor;
 import org.springframework.batch.core.*;
@@ -7,13 +7,12 @@ import org.springframework.batch.core.configuration.annotation.StepBuilderFactor
 import org.springframework.batch.core.launch.JobLauncher;
 import org.springframework.batch.core.scope.context.ChunkContext;
 import org.springframework.batch.core.step.job.DefaultJobParametersExtractor;
-import org.springframework.batch.core.step.job.JobParametersExtractor;
 import org.springframework.batch.core.step.tasklet.Tasklet;
 import org.springframework.batch.repeat.RepeatStatus;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
-@Configuration
+//@Configuration
 @RequiredArgsConstructor
 public class JobStepConfiguration {
 

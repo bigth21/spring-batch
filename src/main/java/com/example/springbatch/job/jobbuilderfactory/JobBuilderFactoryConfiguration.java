@@ -1,4 +1,4 @@
-package com.example.springbatch.execution.jobbuilderfactory;
+package com.example.springbatch.job.jobbuilderfactory;
 
 
 import lombok.RequiredArgsConstructor;
@@ -11,7 +11,6 @@ import org.springframework.batch.core.job.flow.Flow;
 import org.springframework.batch.core.launch.support.RunIdIncrementer;
 import org.springframework.batch.repeat.RepeatStatus;
 import org.springframework.context.annotation.Bean;
-import org.springframework.context.annotation.Configuration;
 
 //@Configuration
 @RequiredArgsConstructor

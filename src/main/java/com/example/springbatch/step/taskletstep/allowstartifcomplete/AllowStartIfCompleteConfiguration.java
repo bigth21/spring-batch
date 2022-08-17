@@ -1,25 +1,23 @@
-package com.example.springbatch.execution.taskletstep.startlimit;
+package com.example.springbatch.step.taskletstep.allowstartifcomplete;
 
 import lombok.RequiredArgsConstructor;
 import org.springframework.batch.core.Job;
 import org.springframework.batch.core.Step;
 import org.springframework.batch.core.configuration.annotation.JobBuilderFactory;
 import org.springframework.batch.core.configuration.annotation.StepBuilderFactory;
-import org.springframework.batch.core.launch.support.RunIdIncrementer;
 import org.springframework.batch.repeat.RepeatStatus;
 import org.springframework.context.annotation.Bean;
-import org.springframework.context.annotation.Configuration;
 
 //@Configuration
 @RequiredArgsConstructor
-public class StartLimitConfiguration {
+public class AllowStartIfCompleteConfiguration {
 
     private final JobBuilderFactory jobBuilderFactory;
     private final StepBuilderFactory stepBuilderFactory;
 
     @Bean
     public Job batchJob() {
-        return this.jobBuilderFactory.get("startLimit.job")
+        return this.jobBuilderFactory.get("allowStartIfComplete.job")
                 .start(step1())
                 .build();
     }
@@ -31,7 +29,6 @@ public class StartLimitConfiguration {
                     return RepeatStatus.FINISHED;
                 })
                 .allowStartIfComplete(true)
-                .startLimit(1)
                 .build();
     }
 }

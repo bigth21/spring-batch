@@ -1,4 +1,4 @@
-package com.example.springbatch.execution.simplejob;
+package com.example.springbatch.job.simplejob;
 
 import lombok.RequiredArgsConstructor;
 import org.springframework.batch.core.*;
@@ -7,7 +7,6 @@ import org.springframework.batch.core.configuration.annotation.StepBuilderFactor
 import org.springframework.batch.core.launch.support.RunIdIncrementer;
 import org.springframework.batch.repeat.RepeatStatus;
 import org.springframework.context.annotation.Bean;
-import org.springframework.context.annotation.Configuration;
 
 //@Configuration
 @RequiredArgsConstructor
