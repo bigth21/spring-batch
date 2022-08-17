@@ -19,7 +19,7 @@ import org.springframework.context.annotation.Configuration;
 import java.util.Arrays;
 import java.util.List;
 
-@Configuration
+//@Configuration
 @RequiredArgsConstructor
 public class TaskletStepConfiguration {
 
@@ -33,7 +33,6 @@ public class TaskletStepConfiguration {
                 .build();
     }
 
-    @Bean
     public Step taskBasedStep() {
         return stepBuilderFactory.get("taskBasedStep")
                 .tasklet(new Tasklet() {
@@ -46,8 +45,6 @@ public class TaskletStepConfiguration {
                 .allowStartIfComplete(true) // Irrespective of success or failure, restart will always be executed;
                 .build();
     }
-
-    @Bean
     public Step chunkBasedStep() {
         return stepBuilderFactory.get("chunkBasedStep")
                 .<String, String>chunk(10)
