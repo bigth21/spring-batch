@@ -7,6 +7,7 @@ import org.springframework.batch.core.Step;
 import org.springframework.batch.core.StepContribution;
 import org.springframework.batch.core.configuration.annotation.JobBuilderFactory;
 import org.springframework.batch.core.configuration.annotation.StepBuilderFactory;
+import org.springframework.batch.core.launch.support.RunIdIncrementer;
 import org.springframework.batch.core.scope.context.ChunkContext;
 import org.springframework.batch.core.step.tasklet.Tasklet;
 import org.springframework.batch.repeat.RepeatStatus;
@@ -24,7 +25,10 @@ public class BatchStatusConfiguration {
     public Job batchJob() {
         return jobBuilderFactory.get("batchStatus.job")
                 .start(step1())
-                .next(step2())
+                .on(ExitStatus.FAILED.getExitCode()).to(step2())
+                .from(step1())
+                .on(ExitStatus.COMPLETED.getExitCode()).stop()
+                .end()
                 .build();
     }
 
@@ -34,7 +38,9 @@ public class BatchStatusConfiguration {
                 .tasklet(new Tasklet() {
                     @Override
                     public RepeatStatus execute(StepContribution contribution, ChunkContext chunkContext) throws Exception {
-                        return null;
+//                        contribution.setExitStatus(ExitStatus.FAILED);
+                        throw new RuntimeException();
+//                        return null;
                     }
                 }).build();
     }
@@ -45,7 +51,6 @@ public class BatchStatusConfiguration {
                 .tasklet(new Tasklet() {
                     @Override
                     public RepeatStatus execute(StepContribution contribution, ChunkContext chunkContext) throws Exception {
-                        contribution.setExitStatus(ExitStatus.FAILED);
                         return null;
                     }
                 }).build();
