@@ -1,6 +1,7 @@
 package com.example.springbatch.flow.transition;
 
 import lombok.RequiredArgsConstructor;
+import org.springframework.batch.core.ExitStatus;
 import org.springframework.batch.core.Job;
 import org.springframework.batch.core.Step;
 import org.springframework.batch.core.StepContribution;
@@ -44,6 +45,7 @@ public class BatchStatusConfiguration {
                 .tasklet(new Tasklet() {
                     @Override
                     public RepeatStatus execute(StepContribution contribution, ChunkContext chunkContext) throws Exception {
+                        contribution.setExitStatus(ExitStatus.FAILED);
                         return null;
                     }
                 }).build();
